@@ -1,0 +1,1 @@
+export const ImagesNames = ['encenadaport', 'fjord', 'icelandwaterfall', 'palmtunnel', 'santamonica'];
