@@ -1,10 +1,9 @@
-import express, {Request, Response } from "express";
-import resize from "../../utilities/helper";
-
+import express, { Request, Response } from 'express';
+import processImage from '../../utilities/helper';
 
 const images = express.Router();
 
-images.get('/', resize, (_req: Request, res: Response):void => {
+images.get('/', processImage, (_req: Request, res: Response) => {
     res.send('filename');
 });
 

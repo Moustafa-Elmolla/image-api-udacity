@@ -1,15 +1,14 @@
-import express, {Request, Response } from "express";
-import ImagesList from './api/imageslist'
-import images from './api/images'
+import { Router, Request, Response } from 'express';
+import imagesList from './api/imageslist';
+import images from './api/images';
 
+const routes = Router();
 
-const routes = express.Router();
-
-routes.get('/', (_req: Request, res: Response):void => {
-    res.status(200).send('main api route');
+routes.get('/', (_req: Request, res: Response) => {
+    res.send('main api route');
 });
 
-routes.use('/images', images)
-routes.use('/imageslist', ImagesList);
+routes.use('/images', images);
+routes.use('/imageslist', imagesList);
 
 export default routes;

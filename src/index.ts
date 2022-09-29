@@ -1,38 +1,38 @@
 import express, { Application } from 'express';
 import routes from './routes/index';
-import morgan from 'morgan';
-import errorMiddleware from './middleware/error.middleware';
-// import logger from './utilities/logger';
+// import morgan from 'morgan';
+// import errorMiddleware from './middleware/error.middleware';
+import logger from './utilities/logger';
 
-
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 //create server
 const app: Application = express();
 
 //HTTP request logger middleware
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+// app.use(morgan('dev'));
 
-app.get('/', (req, res) => {
-    res.end("Morgan Logger App");
-})
+// app.get('/api', (req, res) => {
+//     res.send('Hello, from API page');
+// });
 
-//add route 
-app.use('/api', routes);
+//add route
+
+// Handeling Error
+// app.use(errorMiddleware);
+
+app.use('/api', logger, routes);
 
 //routes
 // app.get('/', logger, (_req, res) => {
-//     res.send('/images')
-// })
+//     res.send('/images');
+// });
 // app.get('/', logger, (_req, res) => {
-//     res.send('/imageslist')
-// })
-
-// Handeling Error
-app.use(errorMiddleware);
+//     res.send('/imageslist');
+// });
 
 //start express server
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server is running at http://localhost:${PORT}`);
 });
 
 export default app;

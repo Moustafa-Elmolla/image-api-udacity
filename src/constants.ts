@@ -1,1 +1,7 @@
-export const ImagesNames = ['encenadaport', 'fjord', 'icelandwaterfall', 'palmtunnel', 'santamonica'];
+export const imagesNames = [
+    'encenadaport',
+    'fjord',
+    'icelandwaterfall',
+    'palmtunnel',
+    'santamonica',
+];

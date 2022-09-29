@@ -1,10 +1,10 @@
-import express, {Request, Response } from "express";
-import {ImagesNames} from '../../constants'
+import express, { Request, Response } from 'express';
+import { imagesNames } from '../../constants';
 
-const ImagesList = express.Router();
+const imagesList = express.Router();
 
-ImagesList.get('/', (_req: Request, res: Response):void => {
-    res.send(`${ImagesNames.toString()}`);
+imagesList.get('/', (_req: Request, res: Response): void => {
+    res.send(`${imagesNames.toString()}`);
 });
 
-export default ImagesList;
+export default imagesList;
