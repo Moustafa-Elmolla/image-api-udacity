@@ -2,27 +2,41 @@ import { Request, Response } from 'express';
 import sharp from 'sharp';
 import path from 'path';
 import fs from 'fs';
+import { imagesNames } from '../constants';
+
+// const reqPath = path.join(__dirname, '../../');
 
 const processImage = async (req: Request, res: Response) => {
-    const filename = req.query.filename;
+    const filename = req.query.filename as string;
     const width = parseInt(req.query.width as string);
     const height = parseInt(req.query.height as string);
-    const newPath = __dirname + '../../assets/thumbnail/';
-    // console.log('here is newPath', newPath);
+    const imageName = imagesNames.includes(filename);
+    const newPath = path.join(__dirname, '../../assets/thumbnail/');
+
+    // console.log('here is reqPath', reqPath);
+    console.log('here is newPath', newPath);
 
     const imagePath: string = path.normalize(
         newPath + filename + '-' + width + '-' + height + '.jpg'
     );
-    const orgPath = __dirname + '../../assets/images/';
-    // console.log('here is imagePath !!!', imagePath);
+    console.log('here is imagePath', imagePath);
+    const orgPath = path.join(__dirname, '../../assets/images/');
+    console.log('here is orgPath', orgPath);
+
     const orgimages: string = path.normalize(orgPath + filename);
+    console.log('here is orgimages !!!', orgimages);
+
+    if (imageName === false) {
+        return res
+            .status(404)
+            .send('Image not found, This image does not exist.');
+    }
 
     if (!fs.existsSync(orgimages)) {
-        res.status(400).send('Input file Missing');
-        return;
+        return res.status(400).send('Input file Missing');
     }
     if (fs.existsSync(imagePath)) {
-        return res.status(200).sendFile(imagePath);
+        res.status(200).sendFile(imagePath);
     } else {
         if (filename != null) {
             resizeImage(
@@ -30,20 +44,21 @@ const processImage = async (req: Request, res: Response) => {
                 width as unknown as number,
                 height as unknown as number
             );
-            await setTimeout(() => {
-                return res.status(200).sendFile(imagePath);
-            }, 1000);
         }
     }
 };
-async function resizeImage(filename: string, width: number, height: number) {
-    // console.log('resizeImage value', filename);
+async function resizeImage(
+    filename: string,
+    width: number,
+    height: number
+): Promise<string | undefined> {
     const input = './assets/images/' + filename;
     const output = './assets/thumbnail/' + filename;
     try {
         await sharp(input)
             .resize(width, height)
             .toFile(output + '-' + width + '-' + height + '-' + '.jpg');
+        return;
     } catch (error) {
         console.log(error);
     }
