@@ -2,7 +2,7 @@ import express, { Application } from 'express';
 import routes from './routes/index';
 // import morgan from 'morgan';
 // import errorMiddleware from './middleware/error.middleware';
-import logger from './utilities/logger';
+// import logger from './utilities/logger';
 
 const PORT = process.env.PORT || 3000;
 //create server
@@ -20,7 +20,7 @@ const app: Application = express();
 // Handeling Error
 // app.use(errorMiddleware);
 
-app.use('/api', logger, routes);
+app.use('/api', routes);
 
 //routes
 // app.get('/', logger, (_req, res) => {

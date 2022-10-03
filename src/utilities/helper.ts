@@ -11,6 +11,7 @@ const processImage = async (req: Request, res: Response) => {
     const width = parseInt(req.query.width as string);
     const height = parseInt(req.query.height as string);
     const imageName = imagesNames.includes(filename);
+    console.log('imageName!! ', imageName);
     const newPath = path.join(__dirname, '../../assets/thumbnail/');
 
     // console.log('here is reqPath', reqPath);
@@ -39,7 +40,7 @@ const processImage = async (req: Request, res: Response) => {
         res.status(200).sendFile(imagePath);
     } else {
         if (filename != null) {
-            resizeImage(
+            await resizeImage(
                 filename as string,
                 width as unknown as number,
                 height as unknown as number

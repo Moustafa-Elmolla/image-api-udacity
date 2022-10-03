@@ -4,7 +4,7 @@ import processImage from '../../utilities/helper';
 const images = express.Router();
 
 images.get('/', processImage, (_req: Request, res: Response) => {
-    res.send('filename');
+    res.sendFile('filename');
 });
 
 export default images;
