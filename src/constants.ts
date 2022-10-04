@@ -1,4 +1,4 @@
-export const imagesNames = [
+export const imagesNames: string[] = [
     'encenadaport',
     'fjord',
     'icelandwaterfall',

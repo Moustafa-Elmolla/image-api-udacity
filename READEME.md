@@ -41,5 +41,5 @@ http://localhost:3000/api
 ## For check API endpoint :
 
 ```
-http://localhost:3000/api/images?filename=fjord.jpg&width=200&height=200
+http://localhost:3000/api/images/?filename=fjord&width=500&height=500
 ```
